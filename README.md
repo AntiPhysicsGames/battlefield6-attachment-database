@@ -34,7 +34,39 @@ Point at the section explicitly — it sits at the end of a long page and models
 
 ## Status
 
-**v0.9** — pre-release. All nine attachment slots modeled. See Open Questions for what is still missing.
+**v0.9.1** — pre-release. All nine attachment slots modeled. See Open Questions for what is still missing.
+
+## Changelog
+
+### v0.9.1
+
+**Corrections**
+
+- Ribbed Stubby no longer incorrectly lists `+mSPD`.
+- `−SEEN` redefined: the laser projects a beam roughly 5m into world space, revealing position rather than presence. Red and Violet are positionally quiet, not invisible — the 20–30 point tier is not disqualified for stealth builds.
+- Rule 2 no longer claims high-rung grips are unaffordable for mobile players. Both drawbacks have counters.
+- Rule 4 narrowed: mounting is the only thing that improves on standing still, not the only purchasable spread reduction.
+- Fire-mode attachments marked weapon-specific rather than competing choices.
+
+**Additions**
+
+- Burst Training (15, ergonomics) and the `BURST` tag.
+- `VARZOOM` split into `ZTOGGLE` and `ZCYCLE`. The two-magnification optics
+  and the multi-magnification ones are priced differently and now read that
+  way in the table.
+- `+mSPD` and `+PEN` added to the component costs in Rule 1.
+- sym.gg and the ADS Spread Simulator linked where they are useful, not just
+  in Sources.
+
+**Editorial**
+
+- Removed overstating language throughout.
+- Colour-coded callouts by audience: blue is addressed to an assistant, amber
+  to you, red is a warning, green is a finding.
+
+### v0.9
+
+Initial release.
 
 ## Corrections
 

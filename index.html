@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  BF6 ATTACHMENT DATABASE  ·  v0.9
+  BF6 ATTACHMENT DATABASE  ·  v0.9.1
   Compiled and written by AntiPhysicsGames
   29 July 2026
 
@@ -19,8 +19,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="version" content="0.9">
-<title>BF6 Attachment Database — v0.9</title>
+<meta name="version" content="0.9.1">
+<title>BF6 Attachment Database — v0.9.1</title>
 <meta name="author" content="AntiPhysicsGames">
 <meta name="description" content="A reverse-engineered reference for Battlefield 6 attachments: costs, effects, tiered stat ladders and the pricing formula that governs them.">
 <meta name="copyright" content="© 2026 AntiPhysicsGames · CC BY-NC-SA 4.0">
@@ -89,6 +89,7 @@
   ul{margin:9px 0;padding-left:20px} li{margin:5px 0}
   .note{color:var(--dim);font-size:13.5px}
   .big{font-size:16px}
+  sup{font-size:.7em;color:var(--accent);font-weight:700}
   .ver{display:inline-block;margin-left:10px;padding:2px 9px;border-radius:5px;vertical-align:middle;
        font:700 12px/1.5 ui-monospace,monospace;color:var(--accent);
        background:rgba(240,135,31,.12);border:1px solid rgba(240,135,31,.4)}
@@ -103,7 +104,7 @@
   .support a{line-height:0;opacity:.95;transition:opacity .15s}
   .support a:hover{opacity:1}
   .llmnote{margin:18px 0;padding:16px 20px;border-radius:10px;
-      background:rgba(96,165,250,.06);border:1px dashed rgba(96,165,250,.5)}
+      background:rgba(96,165,250,.07);border:1px solid rgba(96,165,250,.35)}
   .llmnote h4{margin:0 0 4px;font-size:14px;color:var(--conceal);
       font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
   .llmnote ol{margin:10px 0 0;padding-left:20px}
@@ -116,6 +117,11 @@
   .bub-llm{background:rgba(96,165,250,.07);border-color:rgba(96,165,250,.35)}
   .bub-llm h4{color:var(--conceal)}
   .bub-man{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.35)}
+  .userbox{margin:18px 0;padding:15px 18px;border-radius:10px;
+      background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.35)}
+  .userbox h4{margin:0 0 8px;font-size:14px;color:var(--cap)}
+  .userbox ol,.userbox ul{margin:8px 0 0}
+  .userbox li:last-child,.userbox p:last-child{margin-bottom:0}
   .bub-man h4{color:var(--cap)}
   @media print{
     @page{margin:14mm}
@@ -160,9 +166,9 @@
 <body>
 <div class="wrap">
 
-<h1>BF6 Attachment Database <span class="ver">v0.9</span></h1>
+<h1>BF6 Attachment Database <span class="ver">v0.9.1</span></h1>
 <p class="sub">What Battlefield 6 attachments actually do — compiled from in-game tooltips, cross-referenced against datamined stat tables. Every attachment slot, modeled.</p>
-<p class="byline">Compiled and written by <b>AntiPhysicsGames</b> · v0.9 · 29 July 2026 · <span style="color:var(--faint)">pre-release draft</span></p>
+<p class="byline">Compiled and written by <b>AntiPhysicsGames</b> · v0.9.1 · 29 July 2026 · <span style="color:var(--faint)">pre-release draft</span></p>
 
 <div class="warn">
 <strong>Why this exists.</strong> No public source has the full picture. Every aggregator is missing at least two mechanics the in-game tooltips describe plainly, several carry import errors — including costs off by a factor of eight — and several list attachments that do not exist in the game. See the Error Log.
@@ -182,7 +188,6 @@
 </div>
 <div class="bubble bub-man">
 <h4>On your own</h4>
-<p>The allocation order below is the whole method, and doing it by hand is worth it at least once — the constraints only become intuitive after you have felt them fight each other.</p>
 <p><b>Manual is better when</b> you already know the weapon and are iterating on a build you have played, when you are adjusting one slot rather than starting over, or when you are testing a specific pick against feel. It is also faster than describing a weapon you have built ten times.</p>
 <p><b>The last step is the same either way.</b> Sum the components, compare to the in-game cost, and if the numbers disagree the tooltip has something in it you have not accounted for.</p>
 </div>
@@ -196,6 +201,11 @@
 <tr><td class="pts">2</td><td><b>Recoil direction variation</b></td><td>Above ~35° makes Linear Comp strong. Below ~20° it is a straight downgrade</td></tr>
 <tr><td class="pts">3</td><td><b>Spread growth per shot</b></td><td>High growth means recoil attachments hit a wall — the limiter is spread, which grips barely touch and only mounting halves</td></tr>
 </table>
+
+<div class="userbox">
+<h4>Where to find those three numbers</h4>
+<p style="margin-bottom:0">All of it is on <a href="https://sym.gg/legacy/index.html?game=bf6&amp;page=charts">sym.gg</a> — damage bands and their break ranges, BTK, recoil direction variation and spread growth per shot, listed per weapon. Read the live table, not the annotated example image above it; that diagram carries legacy values.</p>
+</div>
 
 <h3>The budget</h3>
 <p>Four slots have no zero-cost option, so <b>20 points are committed before you choose anything</b>:</p>
@@ -217,7 +227,7 @@
 <tr><td class="pts">7</td><td><b>Recover the ADS rung if you gave one up</b></td><td>Any stubby, angled grip or handstop restores it. Both slots grant <span class="t buff">+ADS</span> independently, so they stack</td></tr>
 <tr><td class="pts">8</td><td><b>Assume a 5-point magazine to start</b></td><td>Every weapon sampled offers at least one at the floor. Build the whole loadout against that, then decide what capacity you actually want and cut elsewhere to afford it — going the other way means guessing a number that swings 5 to 55</td></tr>
 <tr><td class="pts">9</td><td><b>Spend the floors deliberately</b></td><td>You are paying 5 each regardless, so an upgrade costs only its difference. Lightweight ammo is 5 over Standard, not 10</td></tr>
-<tr><td class="pts">10</td><td><b>Buy back what you can afford to</b></td><td><span class="t debuff">−mACC</span> → 50 MW Violet (10, unseen). <span class="t debuff">−mSPD</span> → Lightweight ammo (10). Neither counter competes with the slot that inflicted the penalty</td></tr>
+<tr><td class="pts">10</td><td><b>Buy back what you can afford to</b></td><td><span class="t debuff">−mACC</span> → 50 MW Violet (10, no beam). <span class="t debuff">−mSPD</span> → Lightweight ammo (10). Neither counter competes with the slot that inflicted the penalty</td></tr>
 <tr><td class="pts">11</td><td><b>Verify against the formula</b></td><td>Sum the tooltip components and compare to the in-game cost. A mismatch means you missed an effect</td></tr>
 </table>
 
@@ -239,7 +249,7 @@
 <p class="note">None of these are bad. They are answers to questions the player has not asked yet.</p>
 
 <h3>Spending a remainder</h3>
-<p>Builds land on multiples of 5 and frequently come up short by exactly one step. <b>Spend it upgrading something already in the build, not adding a new slot.</b> Five points that make a load-bearing pick better beat five points spent on an attachment nobody asked for.</p>
+<p>Builds land on multiples of 5 and frequently come up short by one step. <b>Spend it upgrading something already in the build, not adding a new slot.</b></p>
 <table>
 <tr><th>Have</th><th>Upgrade to</th><th>Buys</th><th>Cost</th></tr>
 <tr><td>Standard ammo</td><td>Lightweight</td><td><span class="t buff">+mSPD</span></td><td class="pts">+5</td></tr>
@@ -247,22 +257,25 @@
 <tr><td>Nothing in optic accessory</td><td>Canted Iron Sights</td><td>A 1x backup at any range</td><td class="pts">+5</td></tr>
 <tr><td>Floor magazine</td><td>Its FAST variant</td><td><span class="t buff">+RELOAD</span></td><td class="pts">+5</td></tr>
 <tr><td>Standard Suppressor</td><td>Lightened Suppressor</td><td><span class="t buff">+RBLD</span></td><td class="pts">+10</td></tr>
-<tr><td>Alloy Vertical</td><td>Ribbed Stubby</td><td><span class="t buff">+ADS</span> <span class="t buff">+mSPD</span></td><td class="pts">+10</td></tr>
+<tr><td>Alloy Vertical</td><td>Ribbed Stubby</td><td><span class="t buff">+ADS</span></td><td class="pts">+10</td></tr>
 <tr><td>Any grip</td><td>One recoil rung higher</td><td><span class="t buff">+REC</span>, if you can carry the drawback</td><td class="pts">+10</td></tr>
 </table>
 <div class="warn">
 <strong>Ergonomics is the residual slot, and it will pull at you.</strong>
-<p>It is the only slot that is optional, always available and cheap, so a leftover 5 lands there by default. That is not automatically wrong — but it should never be a reason the build works, and it should never be described as one.</p>
-<p style="margin-bottom:0"><b>If a remainder genuinely has nowhere better to go, take them in this order:</b> Magwell Flare (10) reloading without leaving your sights is a real capability · Mag Catch (5) faster reloads · Rail Cover (5) faster draw · <b>Aftermarket Buffer (5) last</b> — it changes nothing about the weapon, only how much the sight picture jumps.</p>
+<p>It is the only slot that is optional, always available and cheap, so a leftover 5 lands there by default. That is not wrong — but it should never be described as a reason the build works.</p>
+<p style="margin-bottom:0"><b>If a remainder has nowhere better to go, in order:</b> Magwell Flare (10) · Mag Catch (5) · Rail Cover (5) · <b>Aftermarket Buffer (5) last</b>.</p>
 </div>
 
 <h3>Traps worth naming</h3>
-<ul>
-<li><b>Stacked <span class="t debuff">−mSPD</span>.</b> A high-capacity magazine, a <span class="t buff">+REC4</span> grip and a thermal optic all charge the same stat, three slots deep, against one 10-point counter</li>
+<div class="warn">
+<ul style="margin:0">
+<li><b>Stacked <span class="t debuff">−mSPD</span>.</b> A high-capacity magazine, a <span class="t buff">+REC4</span> grip and a thermal optic all charge the same stat, three slots deep, against a single counter in a fourth</li>
 <li><b>Buying recoil on a spread-limited weapon.</b> If spread growth is the ceiling, more <span class="t buff">+REC</span> does not raise it</li>
-<li><b>Lasers above 10 points.</b> Everything past the floor tier is <span class="t conceal">−SEEN</span>, which undoes a suppressor you already paid for</li>
-<li><b>Assuming a magazine cost.</b> The magazine slot is the one place costs genuinely swing per weapon — 5 to 55 — and it is also where published data is most often wrong. A single bad assumption there can be 35 points</li>
+<li><b>Treating a counterable drawback as free.</b> <span class="t debuff">−mACC</span> can be cancelled, but only two <span class="t buff">+mACC</span> sources exist — spending one to get back to zero caps your ceiling a tier lower than a clean grip would have</li>
+<li><b>A projected beam on slow play.</b> Any laser above the floor tier throws a beam roughly 5m ahead, which rounds corners before you do. Irrelevant if you push; a real tell if you hold angles</li>
+<li><b>Assuming a magazine cost.</b> Magazines swing 5 to 55 per weapon and are where published data is most often wrong. A single bad assumption can be 35 points</li>
 </ul>
+</div>
 
 <h2>Tag legend</h2>
 
@@ -306,7 +319,7 @@
 <tr><td><span class="t conceal">HIDE-MAP</span></td><td>—</td><td>Minimap spot range while firing, cut to ~21m</td></tr>
 <tr><td><span class="t conceal">HIDE-FLASH</span></td><td>—</td><td>Muzzle flash</td></tr>
 <tr><td><span class="t conceal">HIDE-GLINT</span></td><td>—</td><td>Scope glint <span class="t lock">SNIPER</span></td></tr>
-<tr><td>—</td><td><span class="t debuff">−SEEN</span></td><td>Laser beam visible to enemy soldiers</td></tr>
+<tr><td>—</td><td><span class="t debuff">−SEEN</span></td><td>Projects a beam into world space, visible to enemies for roughly 5m ahead of you</td></tr>
 </table>
 
 <h3>Capability &amp; class-lock</h3>
@@ -316,8 +329,10 @@
 <div><span class="t cap">SPRINTFIRE</span> enables firing while sprinting</div>
 <div><span class="t cap">ADS-RELOAD</span> reload without leaving the sight picture</div>
 <div><span class="t cap">FULLAUTO</span> enables full-auto fire</div>
+<div><span class="t cap">BURST</span> enables burst fire</div>
 <div><span class="t cap">THERM</span> thermal optic</div>
-<div><span class="t cap">VARZOOM</span> variable magnification</div>
+<div><span class="t cap">ZTOGGLE</span> toggles between two magnifications</div>
+<div><span class="t cap">ZCYCLE</span> cycles through several magnifications</div>
 <div><span class="t cap">MAGNIFIER</span> doubles the optic's magnification</div>
 <div><span class="t cap">PIGGYBACK</span> adds a top-mounted 1x reflex</div>
 <div><span class="t cap">REGEN-DELAY</span> delays enemy health regeneration</div>
@@ -362,8 +377,7 @@
 <p class="note">Frame steps: 3 · 3 · 2 · 2 · 2 · 2 · 2 · 2</p>
 </div>
 </div>
-<p>Nine rungs each, both on whole frames at 60fps, both widening toward the slow end and both bottoming out at 100ms. They share 300, 200, 167, 133 and 100 but diverge above that — ADS reaches 500 and steps through 250, while draw tops out at 400 and steps through 267 and 233.</p>
-<p><b>The widely-reported "−50ms ADS" is wrong.</b> It only happens to be 50ms between 200 and 300. A stubby on a 367ms weapon saves 67ms; on a 133ms weapon it saves 33ms. <span class="t buff">+DRAW2</span> denotes a two-rung gain.</p>
+<p class="note">A step is 33–67ms depending where you sit on the ladder, not a flat 50. <span class="t buff">+DRAW2</span> denotes a two-rung gain.</p>
 
 <div class="side">
 <div>
@@ -405,6 +419,7 @@
 <div class="good">
 <b class="big">Three net tiers removes the penalty entirely</b>
 <p><b>At <span class="t buff">+mACC</span> ×3, firing while moving is identical to firing while standing still.</b> Not reduced — eliminated. Moving ADS spread starts at <b>0.32° against 0.05° stationary</b>, a 6.4× penalty on every shot taken while strafing, and three tiers collapse it to nothing.</p>
+<p class="note">Those two figures are the <code>ADSStandMoveMin</code> and <code>ADSStandBaseMin</code> values on <a href="https://sym.gg/legacy/index.html?game=bf6&amp;page=charts">sym.gg</a>, listed per weapon in the base spread table on each weapon card.</p>
 <p style="margin-bottom:0">Nothing else in the attachment system removes a drawback outright rather than trading it down.</p>
 </div>
 
@@ -431,46 +446,55 @@
 <p><b>Two is the reachable maximum.</b> One barrel and one laser, and a second laser cannot be mounted. Every other slot has been checked and none of them grant <span class="t buff">+mACC</span>.</p>
 <p>So <b>−3 is modeled but has no known attachment route.</b> Either a source exists outside the nine slots — stance, class trait, or something weapon-specific — or the bottom rung is only reachable in circumstances the attachment system does not control. Until that is identified, <b>build for −2 and treat −3 as unproven.</b></p>
 <p class="note">A <span class="t debuff">−mACC</span> grip drops you to −1 net even with both sources equipped, which is the real argument for the clean grip ceiling on a mobile build.</p>
-<p class="note">Tier range and behaviour cross-checked against Dr. Smiley Henry's <a href="https://drsmileyhenry.github.io/Dr.-Smiley-Henry-BF6-ADS-Spread-Simulator/">ADS Spread Simulator</a>, built on sym.gg data.</p>
+<div class="userbox">
+<h4>Seeing this for yourself</h4>
+<p style="margin-bottom:0">Dr. Smiley Henry's <a href="https://drsmileyhenry.github.io/Dr.-Smiley-Henry-BF6-ADS-Spread-Simulator/">ADS Spread Simulator</a> plots the spread circle shot by shot at every tier, for any weapon, standing or moving. It is the fastest way to see what a tier is actually worth on the gun you are building.</p>
+</div>
 
 <h3>ADS movement speed &nbsp;<span class="clean">tier shifts</span></h3>
 <p>The same tier-shift system as moving accuracy, on its own axis. Every <span class="t buff">+mSPD</span> source moves you one tier better, every <span class="t debuff">−mSPD</span> one tier worse, and the shifts sum.</p>
 <table>
 <tr><th>Shift</th><th>Sources</th></tr>
-<tr><td><b>−1 tier</b> <span class="note">better</span></td><td>Lightweight ammo &nbsp;·&nbsp; Ribbed Stubby &nbsp;·&nbsp; low-capacity magazines</td></tr>
+<tr><td><b>−1 tier</b> <span class="note">better</span></td><td>Lightweight ammo &nbsp;·&nbsp; low-capacity magazines</td></tr>
 <tr><td><b>+1 tier</b> <span class="note">worse</span></td><td><span class="t buff">+REC4</span> and <span class="t buff">+REC5</span> grips &nbsp;·&nbsp; high-capacity magazines &nbsp;·&nbsp; multi-stage and thermal optics</td></tr>
 </table>
 <p><b>This is the one stat three separate slots can charge at once</b>, and it has a single counter in a fourth. A high-control, high-capacity, thermal build is three tiers down against one available tier back.</p>
 <h2>Design rules</h2>
 
 <h3>1 · Attachment costs are pure arithmetic</h3>
-<p>Every cost is the sum of its components. Verified against all 18 underbarrel grips, all 13 muzzles, all 11 barrel archetypes and the ammo slot.</p>
+<p>Every cost is the sum of its components.</p>
+<div class="side">
+<div>
 <table>
-<tr><th>Component</th><th>Cost</th></tr>
+<tr><th>Firing</th><th>Cost</th></tr>
 <tr><td><span class="t buff">+REC1</span></td><td class="pts">10</td></tr>
 <tr><td><span class="t buff">+REC2</span></td><td class="pts">20</td></tr>
 <tr><td><span class="t buff">+REC3</span></td><td class="pts">30</td></tr>
 <tr><td><span class="t buff">+REC4</span></td><td class="pts">45</td></tr>
 <tr><td><span class="t buff">+REC5</span></td><td class="pts">55</td></tr>
-<tr><td><span class="t buff">+ADS</span></td><td class="pts">+10</td></tr>
-<tr><td><span class="t cap">MOUNT</span></td><td class="pts">+10</td></tr>
-<tr><td><span class="t buff">+RBLD</span></td><td class="pts">+10</td></tr>
-<tr><td><span class="t buff">+SUSTAIN</span></td><td class="pts">+10</td></tr>
-<tr><td><span class="t buff">+mACC</span></td><td class="pts">+10</td></tr>
-<tr><td><span class="t buff">+HIP1</span></td><td class="pts">+10</td></tr>
-<tr><td><span class="t conceal">HIDE-MAP</span></td><td class="pts">+10</td></tr>
-<tr><td><span class="t buff">+DRAW</span></td><td class="pts">+5</td></tr>
-<tr><td><span class="t buff">+VEL</span></td><td class="pts">+5</td></tr>
+<tr><td><span class="t buff">+RBLD</span></td><td class="pts">10</td></tr>
+<tr><td><span class="t buff">+SUSTAIN</span></td><td class="pts">10</td></tr>
+<tr><td><span class="t buff">+ADS</span></td><td class="pts">10</td></tr>
 </table>
-
-<h4>Drawbacks come in two weights</h4>
-<p>Removing a drawback costs points; accepting one discounts them. The amount depends on which drawback.</p>
+</div>
+<div>
 <table>
-<tr><th>Weight</th><th>Drawbacks</th><th>Remove</th><th>Accept</th></tr>
-<tr><td class="nm">Minor</td><td><span class="t debuff">−SWAY</span> <span class="t debuff">−VEL</span> <span class="t debuff">−DRAW</span></td><td class="pts">+5</td><td class="pts">−5</td></tr>
-<tr><td class="nm">Major</td><td><span class="t debuff">−mACC</span> <span class="t debuff">−mSPD</span> <span class="t debuff">−HIP</span></td><td class="pts">+10</td><td class="pts">−10</td></tr>
+<tr><th>Everything else</th><th>Cost</th></tr>
+<tr><td><span class="t buff">+DRAW</span></td><td class="pts">5</td></tr>
+<tr><td><span class="t buff">+VEL</span></td><td class="pts">5</td></tr>
+<tr><td><span class="t buff">+mACC</span></td><td class="pts">10</td></tr>
+<tr><td><span class="t buff">+mSPD</span></td><td class="pts">10</td></tr>
+<tr><td><span class="t buff">+HIP1</span></td><td class="pts">10</td></tr>
+<tr><td><span class="t buff">+PEN</span></td><td class="pts">10</td></tr>
+<tr><td><span class="t cap">MOUNT</span></td><td class="pts">10</td></tr>
+<tr><td><span class="t conceal">HIDE-MAP</span></td><td class="pts">10</td></tr>
 </table>
-<p class="note"><b>Evidence:</b> Single-Port → Double-Port Brake and Long → Lightened Suppressor both price <span class="t debuff">−SWAY</span> at 5. Heavy Ext. and Short barrels both take the −5 discount for <span class="t debuff">−DRAW</span> and <span class="t debuff">−VEL</span>. Standard → CQB Suppressor prices <span class="t debuff">−HIP</span> at 10, four grip pairs price <span class="t debuff">−mACC</span> at 10, and TH-RDS prices <span class="t debuff">−mSPD</span> at 10.</p>
+</div>
+</div>
+
+<p><b>Drawbacks run the same prices in reverse.</b> A drawback listed on an attachment discounts it by exactly what the matching benefit costs to buy — a grip that gives up moving accuracy is 10<sup>†</sup> cheaper, which is what moving accuracy costs to add anywhere else. Nothing is hidden in the pricing, and no attachment is a bargain.</p>
+<p class="note"><sup>†</sup> <span class="t debuff">−SWAY</span>, <span class="t debuff">−VEL</span> and <span class="t debuff">−DRAW</span> discount by 5.</p>
+<p>So the game is not finding underpriced parts. <b>It is deciding which drawbacks you can afford to carry, across the slots you have, for the way you actually play.</b></p>
 
 <div class="panel">
 <b>Worked examples</b>
@@ -488,7 +512,11 @@
 <li>Flechette (30) = Frangible (20) + <span class="t buff">+PEN</span> (10)</li>
 </ul>
 </div>
-<p><b>There are no value picks and no traps.</b> Every point buys the same performance, so choose on effects rather than efficiency. Anything that does not fit the formula has a hidden effect you have not spotted.</p>
+<div class="good">
+<b class="big">There are no value picks and no traps</b>
+<p style="margin-bottom:0">Every point buys the same performance, so choose on effects rather than efficiency. Anything that does not fit the formula has a hidden effect you have not spotted.</p>
+</div>
+
 
 <h4>Where costs vary between weapons</h4>
 <p>Most attachments cost the same on every weapon that offers them. Muzzles, grips, optics, optic accessories, lasers, lights and ergonomics are fixed, and so are the barrel archetypes. Variance is confined to two places:</p>
@@ -507,20 +535,28 @@
 <p><b>Both penalties have a counter, and both cost 10 points — in other slots.</b></p>
 <table>
 <tr><th>Penalty</th><th>Counter</th><th>Slot</th><th>Pts</th></tr>
-<tr><td><span class="t debuff">−mACC</span></td><td>50 MW Violet <span class="t buff">+mACC</span> <span class="note">(or a Blue laser, but visible)</span></td><td>Accessory</td><td class="pts">10</td></tr>
+<tr><td><span class="t debuff">−mACC</span></td><td>50 MW Violet <span class="t buff">+mACC</span><sup>†</sup></td><td>Accessory</td><td class="pts">10</td></tr>
 <tr><td><span class="t debuff">−mSPD</span></td><td>Lightweight ammo <span class="t buff">+mSPD</span></td><td>Ammo</td><td class="pts">10</td></tr>
 </table>
+<p class="note"><sup>†</sup> A Blue laser also carries <span class="t buff">+mACC</span>, but projects a beam.</p>
 <p>Neither competes with the grip for space, and both cancel one for one. A single Violet laser fully absorbs one penalized grip; adding a Light barrel puts you a tier ahead of base. Lightweight ammo does the same job for <span class="t debuff">−mSPD</span>.</p>
-<p><b>For a mobile build the calculation inverts.</b> Because three net tiers of <span class="t buff">+mACC</span> removes the moving penalty outright, every <span class="t debuff">−mACC</span> grip is a tier spent getting back to zero rather than a tier spent reaching the breakpoint. A clean <span class="t buff">+REC2</span> grip is not a compromise in that build — it is the only way the breakpoint stays reachable.</p>
-<p>That makes <b>Canted Stubby</b> (<span class="t buff">+REC3</span>, <span class="t debuff">−mACC</span> only) the efficient pick for a moving player: 30 points for the grip plus 10 for the Violet buys three rungs of recoil at no accuracy cost. Reaching <span class="t buff">+REC4</span> or <span class="t buff">+REC5</span> also drags in <span class="t debuff">−mSPD</span>, which has no confirmed counter.</p>
+<p><b>For a mobile build the grip choice costs you a tier of moving accuracy, not just points.</b> Only two <span class="t buff">+mACC</span> sources exist, so a clean grip caps you at −2 and a penalized one caps you at −1. Whether that tier is worth more than the recoil rung it buys depends entirely on how much of your shooting happens in motion.</p>
+<p><b>Both drawbacks are recoverable, so the ceiling is a spending decision rather than a hard limit.</b> Two routes land on the same total and deliver different things:</p>
+<table>
+<tr><th>Route</th><th>Spend</th><th>Delivers</th></tr>
+<tr><td>Canted Stubby + Violet + Standard ammo</td><td class="pts">45</td><td><span class="t buff">+REC3</span> <span class="t buff">+ADS</span>, <span class="t debuff">−mACC</span> cancelled</td></tr>
+<tr><td>6H64 Vertical + Violet + Lightweight ammo</td><td class="pts">45</td><td><span class="t buff">+REC4</span>, both <span class="t debuff">−mACC</span> and <span class="t debuff">−mSPD</span> cancelled</td></tr>
+</table>
+<p>Identical cost, because Lightweight ammo is only 5 over the Standard you were paying for anyway. The 6H64 route buys an extra recoil rung and mSPD neutrality; the Canted Stubby route buys <span class="t buff">+ADS</span> instead. Neither is strictly better — but the idea that high-rung grips are unaffordable for a mobile player does not survive the arithmetic.</p>
 <p class="note">Lightweight ammo also satisfies the ammo floor, so its true marginal cost over Standard is only 5.</p>
 
 <h3>3 · Moving ADS spread is already 6.4× worse than stationary</h3>
 <p>Base values are <b>0.32° moving vs 0.05° stationary.</b> <span class="t debuff">−mACC</span> stacks on an already-bad number, making it more expensive than the tooltip implies. Costly to players who shoot while repositioning, nearly free to players who plant first — and removable outright at three net tiers of <span class="t buff">+mACC</span>.</p>
 
 <h3>4 · Mounting is the only purchasable spread reduction</h3>
-<p>Measured at roughly <b>50% recoil and 50% spread reduction</b> while mounted. No grip can do this. The <span class="t buff">+REC</span> ladder improves precision only marginally, and spread is otherwise fixed when you choose the weapon.</p>
-<p><b>The untracked cost is tempo.</b> Mounting takes roughly a second to mount, settle and fire, and locks you in place. Mountable surfaces are plentiful, but the delay appears in no stat. It suits players who set up on an angle and hold it, and actively fights players who shoot while moving.</p>
+<p>Measured at roughly <b>50% recoil and 50% spread reduction</b> while mounted, and it applies whether you are moving or not. No grip comes close — the <span class="t buff">+REC</span> ladder barely touches precision.</p>
+<p class="note"><span class="t buff">+mACC</span> also reduces spread, but only the <i>moving</i> penalty, and only down to the base stationary figure. Mounting is the only thing that improves on standing still.</p>
+<p><b>The untracked cost is tempo.</b> Mounting takes roughly a second to mount, settle and fire, and locks you in place. Mountable surfaces are plentiful, but the delay appears in no stat.</p>
 
 <h3>5 · Suppressors do not affect muzzle velocity</h3>
 <p>The datamined <code>Suppressed</code> velocity column is blank for every assault rifle. Suppressors cost hipfire, sway, or points — never velocity or damage.</p>
@@ -534,7 +570,10 @@
 <tr><td>Optic</td><td class="pts">5</td><td>Iron Sights</td></tr>
 <tr><td>Magazine</td><td class="pts">5</td><td>Lowest-capacity option</td></tr>
 </table>
-<p>Your effective budget is <b>80 points</b>, not 100. Because the floors are unavoidable, upgrading within them is cheaper than it looks — an ammo or barrel upgrade costs only its difference over the floor.</p>
+<div class="good">
+<b class="big">Your effective budget is 80, not 100</b>
+<p style="margin-bottom:0">Because the floors are unavoidable, upgrading within them is cheaper than it looks — an ammo or barrel upgrade costs only its difference over the floor.</p>
+</div>
 
 <h3>7 · The name is not the attachment — the tooltip is</h3>
 <p>Attachment names in this game are decoration. <b>They map to effects neither reliably nor uniquely, in both directions.</b></p>
@@ -556,8 +595,8 @@
 <tr><td>LMR27</td><td class="pts">25</td><td><span class="t buff">+REC1</span> <span class="t buff">+DRAW</span> <span class="t buff">+ADS</span></td><td class="note">10 + 5 + 10 = 25</td></tr>
 </table>
 
-<div class="good">
-<b>Consequences</b>
+<div class="userbox">
+<h4>What this means for you</h4>
 <ul style="margin-bottom:0">
 <li><b>You cannot look an attachment up by name across weapons.</b> A name is not a stable identifier</li>
 <li><b>Read the tooltip on the weapon you're building.</b> It is the only authority</li>
@@ -586,7 +625,7 @@
 <p class="note">Thread Protector, Single-Port Brake and Slant Brake are <b>weapon-specific variants of the same part</b> — never available on the same weapon. See Design Rule 7.</p>
 
 <h3>Linear Comp is an axis converter, not a downgrade</h3>
-<p>It reduces horizontal recoil by <b>20–25%</b> and increases vertical by roughly one rung. Vertical is a learnable pattern; horizontal is a random cone you cannot compensate for. The trade converts randomness into skill.</p>
+<p>It reduces horizontal recoil by <b>20–25%</b> and increases vertical by roughly one rung. Vertical is a learnable pattern; horizontal is a random cone you cannot compensate for.</p>
 <p><b>Take it above ~35° recoil direction variation. Skip it below ~20°</b> — there's no horizontal left to convert and you just eat the vertical penalty.</p>
 
 <h3>The stealth economy</h3>
@@ -629,7 +668,7 @@
 <tr><td class="nm">Slim Angled</td><td class="pts">25</td><td><span class="t buff">+REC1</span></td><td><span class="t buff">+DRAW</span> <span class="t buff">+ADS</span></td><td class="clean">none</td></tr>
 <tr><td class="nm">Full Angled</td><td class="pts">25</td><td><span class="t buff">+REC2</span></td><td><span class="t buff">+DRAW</span> <span class="t buff">+ADS</span></td><td><span class="t debuff">−mACC</span></td></tr>
 
-<tr><td class="nm">Ribbed Stubby</td><td class="pts">30</td><td><span class="t buff">+REC2</span></td><td><span class="t buff">+ADS</span> <span class="t buff">+mSPD</span></td><td class="clean">none</td></tr>
+<tr><td class="nm">Ribbed Stubby</td><td class="pts">30</td><td><span class="t buff">+REC2</span></td><td><span class="t buff">+ADS</span></td><td class="clean">none</td></tr>
 <tr><td class="nm">Canted Stubby</td><td class="pts">30</td><td><span class="t buff">+REC3</span></td><td><span class="t buff">+ADS</span></td><td><span class="t debuff">−mACC</span></td></tr>
 <tr><td class="nm">QD Grip Pod</td><td class="pts">30</td><td><span class="t buff">+REC2</span></td><td><span class="t cap">MOUNT</span></td><td class="clean">none</td></tr>
 <tr><td class="nm">Classic Grip Pod</td><td class="pts">30</td><td><span class="t buff">+REC2</span></td><td><span class="t cap">MOUNT</span> <span class="t buff">+ADS</span></td><td><span class="t debuff">−mACC</span></td></tr>
@@ -697,7 +736,10 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td>Suppressed</td><td class="pts">0m</td><td class="pts">21m</td></tr>
 <tr><td><b>Suppressed + Subsonic</b></td><td class="pts">0m</td><td class="pts"><b>9m</b></td></tr>
 </table>
-<p><b>Subsonic roughly halves both ranges; a suppressor eliminates in-world spotting outright.</b> Stacked, they reach 9m on the minimap — the deepest concealment available, and reachable on any weapon that can mount both.</p>
+<div class="good">
+<b class="big">Suppressor plus Subsonic reaches 9m</b>
+<p style="margin-bottom:0">Subsonic roughly halves both ranges; a suppressor eliminates in-world spotting outright. Stacked, they reach the deepest concealment available — on any weapon that can mount both.</p>
+</div>
 <p class="note">This is the same 9m the enhanced integral suppressor barrel reaches, so <span class="t conceal">HIDE-MAP+</span> is not exclusive to integrally suppressed weapons.</p>
 
 <h3>Headshot multipliers</h3>
@@ -725,7 +767,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td class="nm">Flechette</td><td class="pts">30</td><td><span class="t cap">REGEN-DELAY</span> <span class="t buff">+PEN</span></td></tr>
 <tr><td class="nm">Slugs</td><td class="pts">40</td><td>Single projectile, improved effective range</td></tr>
 </table>
-<p class="note">Flechette is Frangible (20) + <span class="t buff">+PEN</span> (10) — the composition rule holds in the shotgun line too.</p>
+
 
 
 <h2>Optic — 42 <span style="color:var(--buff);font-size:14px">✔ slot complete</span></h2>
@@ -738,17 +780,17 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <p class="note">OSA-7 1.00x · R-MR 1.00x · RMR 1.00x · Mini Flex 1.00x · 2PRO 1.25x · CQ RDS 1.25x · RO-S 1.25x · SU-123 1.50x · 1P87 1.50x · ROX 1.50x · 3VZR 1.75x · RO-M 1.75x · A-P2 1.75x · CCO 2.00x · R4T 2.00x · BF-2M 2.50x · Baker 3.00x · SDO 3.50x · PVQ-31 4.00x · LDS 4.50x · ST Prism 5.00x · SF-G2 5.00x · S-VPS 6.00x · SSDS 6.00x · LERT 8.00x · NFX 8.00x · R-VPS 10.00x</p>
 
 <h4>20–35 pts — the premium tier</h4>
-<p><b>Zoom range is what you pay for, and <span class="t debuff">−mSPD</span> is what you pay with.</b> Two-stage variables are clean; multi-stage variables and all thermals carry the movement penalty. The most expensive optic in the game is the one that buys the penalty back.</p>
+<p><b>Zoom range is what you pay for, and <span class="t debuff">−mSPD</span> is what you pay with.</b> <span class="t cap">ZTOGGLE</span> is clean; <span class="t cap">ZCYCLE</span> and every thermal carry the movement penalty. The most expensive optic in the game is the one that buys the penalty back.</p>
 <table>
 <tr><th>Optic</th><th>Pts</th><th>Feature</th><th>Drawback</th></tr>
-<tr><td class="nm">SU-230 LPVO</td><td class="pts">20</td><td><span class="t cap">VARZOOM</span> <span class="note">2-stage</span></td><td class="clean">none</td></tr>
-<tr><td class="nm">1P86 LPVO</td><td class="pts">20</td><td><span class="t cap">VARZOOM</span> <span class="note">2-stage</span></td><td class="clean">none</td></tr>
-<tr><td class="nm">DVO LPVO</td><td class="pts">25</td><td><span class="t cap">VARZOOM</span> <span class="note">multi-stage</span></td><td><span class="t debuff">−mSPD</span></td></tr>
-<tr><td class="nm">Mars-F LPVO</td><td class="pts">25</td><td><span class="t cap">VARZOOM</span> <span class="note">multi-stage</span></td><td><span class="t debuff">−mSPD</span></td></tr>
-<tr><td class="nm">MC-CO LPVO</td><td class="pts">25</td><td><span class="t cap">VARZOOM</span> <span class="note">multi-stage</span></td><td><span class="t debuff">−mSPD</span></td></tr>
-<tr><td class="nm">NGFC LPVO</td><td class="pts">25</td><td><span class="t cap">VARZOOM</span> <span class="note">multi-stage</span></td><td><span class="t debuff">−mSPD</span></td></tr>
-<tr><td class="nm">1P88 Variable</td><td class="pts">25</td><td><span class="t cap">VARZOOM</span> <span class="note">multi-stage</span></td><td><span class="t debuff">−mSPD</span></td></tr>
-<tr><td class="nm">SM Rifle Variable</td><td class="pts">25</td><td><span class="t cap">VARZOOM</span> <span class="note">multi-stage</span></td><td><span class="t debuff">−mSPD</span></td></tr>
+<tr><td class="nm">SU-230 LPVO</td><td class="pts">20</td><td><span class="t cap">ZTOGGLE</span></td><td class="clean">none</td></tr>
+<tr><td class="nm">1P86 LPVO</td><td class="pts">20</td><td><span class="t cap">ZTOGGLE</span></td><td class="clean">none</td></tr>
+<tr><td class="nm">DVO LPVO</td><td class="pts">25</td><td><span class="t cap">ZCYCLE</span></td><td><span class="t debuff">−mSPD</span></td></tr>
+<tr><td class="nm">Mars-F LPVO</td><td class="pts">25</td><td><span class="t cap">ZCYCLE</span></td><td><span class="t debuff">−mSPD</span></td></tr>
+<tr><td class="nm">MC-CO LPVO</td><td class="pts">25</td><td><span class="t cap">ZCYCLE</span></td><td><span class="t debuff">−mSPD</span></td></tr>
+<tr><td class="nm">NGFC LPVO</td><td class="pts">25</td><td><span class="t cap">ZCYCLE</span></td><td><span class="t debuff">−mSPD</span></td></tr>
+<tr><td class="nm">1P88 Variable</td><td class="pts">25</td><td><span class="t cap">ZCYCLE</span></td><td><span class="t debuff">−mSPD</span></td></tr>
+<tr><td class="nm">SM Rifle Variable</td><td class="pts">25</td><td><span class="t cap">ZCYCLE</span></td><td><span class="t debuff">−mSPD</span></td></tr>
 <tr><td class="nm">Grim 1.50x</td><td class="pts">25</td><td><span class="t cap">THERM</span></td><td><span class="t debuff">−mSPD</span></td></tr>
 <tr><td class="nm">PAS-35 3.00x</td><td class="pts">25</td><td><span class="t cap">THERM</span></td><td><span class="t debuff">−mSPD</span></td></tr>
 <tr><td class="nm">TS-HD 6.00x</td><td class="pts">25</td><td><span class="t cap">THERM</span></td><td><span class="t debuff">−mSPD</span></td></tr>
@@ -757,11 +799,11 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 
 <div class="good">
 <b>The most expensive optic in the game is priced by the formula</b>
-<p style="margin-bottom:0">Premium feature (25) + remove <span class="t debuff">−mSPD</span> (10) = <b>35</b>. TH-RDS 1.00x is a thermal sight that does not slow you down, and that is the entire reason it costs more than a 10.00x scope. <span class="note">Fifth independent confirmation of the 10-point drawback-removal price.</span></p>
+<p style="margin-bottom:0">Premium feature (25) + remove <span class="t debuff">−mSPD</span> (10) = <b>35</b>. TH-RDS 1.00x is a thermal sight that does not slow you down, and that is the entire reason it costs more than a 10.00x scope.</p>
 </div>
 
-<p><b>Only two features exist at this tier:</b> variable zoom and thermal. Magnification itself remains free — a 10-point 8.00x sits alongside a 10-point 1.00x — so <b>you are never paying for zoom, only for glass behavior.</b></p>
-<p class="note"><b>Variable zoom is not one feature but two, and the pricing separates them exactly.</b> <b>2-stage</b> variables (SU-230, 1P86) toggle between two magnifications, cost <b>20</b>, and carry no penalty. <b>Multi-stage</b> variables cycle through several, cost <b>25</b>, and add <span class="t debuff">−mSPD</span>. Adjusting for the drawback, multi-stage is 15 points dearer than 2-stage — you are paying for range coverage with points <i>and</i> movement, exactly as the thermals do.</p>
+<p><b>Only two features exist at this tier:</b> extra magnification and thermal. Magnification itself remains free — a 10-point 8.00x sits alongside a 10-point 1.00x — so <b>you are never paying for zoom, only for glass behavior.</b></p>
+<p class="note"><span class="t cap">ZTOGGLE</span> costs 20 and carries nothing. <span class="t cap">ZCYCLE</span> costs 25 and adds <span class="t debuff">−mSPD</span> — adjusting for the drawback, 15 points dearer for the extra magnifications.</p>
 <p class="note"><b>Scope glint applies only to sniper rifles.</b> Magnified optics on every other class are signature-free, so there is no concealment argument against magnification outside sniping.</p>
 
 <h2>Optic Accessory</h2>
@@ -773,7 +815,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td class="nm">Canted Reflex</td><td class="pts">10</td><td>45° offset backup reflex</td><td>any optic</td></tr>
 <tr><td class="nm">Magnifier</td><td class="pts">10</td><td><span class="t cap">MAGNIFIER</span> doubles the optic's magnification</td><td class="note">low-power — 1.5x / 1.75x / 2x</td></tr>
 <tr><td class="nm">Piggyback Reflex</td><td class="pts">10</td><td><span class="t cap">PIGGYBACK</span> adds a top-mounted 1x reflex</td><td class="note">high-power — 3x and up</td></tr>
-<tr><td class="nm">Adjustable Magnification 2 / 3 / 4x</td><td class="pts">10</td><td><span class="t cap">VARZOOM</span> variable magnification</td><td><span class="t lock">SNIPER</span></td></tr>
+<tr><td class="nm">Adjustable Magnification 2 / 3 / 4x</td><td class="pts">10</td><td><span class="t cap">ZTOGGLE</span></td><td><span class="t lock">SNIPER</span></td></tr>
 <tr><td class="nm">Anti-Glare Coating</td><td class="pts">10</td><td><span class="t conceal">HIDE-GLINT</span></td><td><span class="t lock">SNIPER</span></td></tr>
 </table>
 
@@ -783,7 +825,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><th>Your optic</th><th>You get</th><th>Result</th></tr>
 <tr><td>1.5x – 2x</td><td><span class="t cap">MAGNIFIER</span></td><td>Doubles up: reach you didn't have</td></tr>
 <tr><td>3x and above</td><td><span class="t cap">PIGGYBACK</span></td><td>Drops to 1x: close range you didn't have</td></tr>
-<tr><td>Sniper scopes</td><td><span class="t cap">VARZOOM</span></td><td>Continuous adjustment</td></tr>
+<tr><td>Sniper scopes</td><td><span class="t cap">ZTOGGLE</span></td><td>A second magnification on demand</td></tr>
 </table>
 <p><b>All three cost 10 points.</b> The game charges a flat fee for "cover a second range band," and simply hands you whichever direction your optic is missing. Canted sights (5–10) do the same job mechanically but work on any optic and require a physical tilt rather than a toggle.</p>
 <p class="note">The split follows magnification: 1.5x–2x optics are offered the Magnifier, 3x and above the Piggyback. Which specific optics appear on a given weapon still varies.</p>
@@ -806,15 +848,19 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <p>Color sets the function, wattage sets the rung, and visibility is the price.</p>
 <table>
 <tr><th>Attachment</th><th>Pts</th><th>Effect</th><th>Visibility</th></tr>
-<tr><td class="nm">5 MW Red</td><td class="pts">10</td><td><span class="t buff">+HIP1</span></td><td class="clean">unseen</td></tr>
-<tr><td class="nm">50 MW Violet</td><td class="pts">10</td><td><span class="t buff">+mACC</span></td><td class="clean">unseen</td></tr>
+<tr><td class="nm">5 MW Red</td><td class="pts">10</td><td><span class="t buff">+HIP1</span></td><td class="clean">no beam</td></tr>
+<tr><td class="nm">50 MW Violet</td><td class="pts">10</td><td><span class="t buff">+mACC</span></td><td class="clean">no beam</td></tr>
 <tr><td class="nm">5 MW Green</td><td class="pts">10</td><td><span class="t buff">+HIP2</span></td><td><span class="t debuff">−SEEN</span></td></tr>
 <tr><td class="nm">50 MW Green</td><td class="pts">20</td><td><span class="t buff">+HIP3</span></td><td><span class="t debuff">−SEEN</span></td></tr>
 <tr><td class="nm">50 MW Blue</td><td class="pts">20</td><td><span class="t buff">+HIP2</span> <span class="t buff">+mACC</span></td><td><span class="t debuff">−SEEN</span></td></tr>
 <tr><td class="nm">120 MW Blue</td><td class="pts">30</td><td><span class="t buff">+HIP3</span> <span class="t buff">+mACC</span></td><td><span class="t debuff">−SEEN</span></td></tr>
 </table>
-<p><b>Blue is Green plus <span class="t buff">+mACC</span> for 10 points</b> at both rungs. Red trades hipfire for concealment; Violet spends its 10 points on <span class="t buff">+mACC</span> instead of hipfire and stays unseen.</p>
-<p><b>Only 5 MW Red and 50 MW Violet are concealment-safe.</b> Everything above 10 points is <span class="t debuff">−SEEN</span>, which rules the 20–30 point tier out of any build that depends on not being spotted — and makes Violet the only unseen source of <span class="t buff">+mACC</span> in the game.</p>
+<p><b>Blue is Green plus <span class="t buff">+mACC</span> for 10 points</b> at both rungs. Red trades hipfire for a shorter beam; Violet spends its 10 points on <span class="t buff">+mACC</span> instead of hipfire.</p>
+
+<h4>What "visible" actually means</h4>
+<p><span class="t debuff">−SEEN</span> means the laser <b>projects a beam into world space</b>, readable by enemies for roughly 5m in front of you. The practical cost is positional: a beam can round a corner before you do, or spill through a doorway you have not stepped into yet. For anyone playing slowly and holding angles, that is a real tell — it announces where you are about to be.</p>
+<p><b>Every laser is noticeable on the weapon itself, including Red and Violet.</b> Looked at directly from any range, the emitter is bright and obvious. <span class="t debuff">−SEEN</span> is not the difference between hidden and seen — it is the difference between betraying yourself around cover and only being visible once someone already has eyes on you.</p>
+<p>So Red and Violet are the <b>positionally quiet</b> options rather than invisible ones. If nothing on the build depends on the enemy failing to notice your gun, the 20–30 point tier is not disqualified — it just costs you the corner.</p>
 
 <h3>Other</h3>
 <table>
@@ -822,7 +868,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td class="nm">Range Finder</td><td class="pts">15</td><td>Displays target distance</td></tr>
 </table>
 
-<h2>Ergonomics — 8 <span style="color:var(--buff);font-size:14px">✔ slot complete</span></h2>
+<h2>Ergonomics — 9 <span style="color:var(--buff);font-size:14px">✔ slot complete</span></h2>
 <p>The most functionally varied slot in the game. Several entries change <i>how the weapon operates</i> rather than adjusting a stat.</p>
 <table>
 <tr><th>Attachment</th><th>Pts</th><th>Effect</th></tr>
@@ -831,16 +877,21 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td class="nm">Rail Cover</td><td class="pts">5</td><td><span class="t buff">+DRAW</span></td></tr>
 <tr><td class="nm">Aftermarket Buffer</td><td class="pts">5</td><td><span class="t cap">VISUAL</span> reduces the visual impact of recoil when firing</td></tr>
 <tr><td class="nm">Magwell Flare</td><td class="pts">10</td><td><span class="t cap">ADS-RELOAD</span></td></tr>
-<tr><td class="nm">Match Trigger</td><td class="pts">15</td><td><span class="t cap">SEMI-ONLY</span> <span class="t buff">+REC1</span></td></tr>
-<tr><td class="nm">A3 Receiver</td><td class="pts">25</td><td><span class="t cap">FULLAUTO</span></td></tr>
-<tr><td class="nm">DLC Bolt</td><td class="pts">30</td><td><span class="t cap">ADS-RELOAD</span> <span class="t lock">SNIPER</span> <span class="note">— all except Mini Scout</span></td></tr>
+<tr><td class="nm">Match Trigger</td><td class="pts">15</td><td><span class="t cap">SEMI-ONLY</span> <span class="t buff">+REC1</span><sup>†</sup></td></tr>
+<tr><td class="nm">Burst Training</td><td class="pts">15</td><td><span class="t cap">BURST</span><sup>†</sup></td></tr>
+<tr><td class="nm">A3 Receiver</td><td class="pts">25</td><td><span class="t cap">FULLAUTO</span> <span class="t lock">M16A4</span></td></tr>
+<tr><td class="nm">DLC Bolt</td><td class="pts">30</td><td><span class="t cap">ADS-RELOAD</span> <span class="t lock">SNIPER</span><sup>‡</sup></td></tr>
 </table>
+<p class="note"><sup>†</sup> Offered on a handful of weapons only. &nbsp; <sup>‡</sup> Every sniper except the Mini Scout.</p>
 <p><b>Aftermarket Buffer (5)</b> reduces screen shake and sight movement without changing any underlying value. Nothing about the bullets changes, but you can see your own impacts and correct mid-burst.</p>
 <p><b>Magwell Flare (10) and DLC Bolt (30)</b> are the same feature split by class — reload without leaving your sight picture.</p>
-<p><b>A3 Receiver (25) converts a semi-auto weapon to full auto</b> — the most transformative attachment in the game. Note the opposition: A3 Receiver makes a DMR automatic, Match Trigger optimizes it for semi. Mutually exclusive design directions on the same weapon.</p>
+<p><b>Three entries change or tune the weapon's fire mode, and all three are weapon-specific.</b> A3 Receiver (25) converts a semi-auto to full auto and appears on the M16A4 alone. Burst Training (15) adds burst, and Match Trigger (15) improves an existing semi-auto — both are scattered across a handful of weapons. You are rarely choosing between them; on most weapons none are offered at all.</p>
 
 <h2>Barrel — 11 archetypes <span style="color:var(--buff);font-size:14px">✔ slot complete</span></h2>
-<p><b>Barrel names are irrelevant.</b> All 163 named entries resolve to eleven archetypes, and the archetype alone determines the stats. The name tells you nothing — 480mm Fluted and 510mm Fluted are different archetypes on the same weapon.</p>
+<div class="good">
+<b class="big">163 names, 11 archetypes</b>
+<p style="margin-bottom:0">The archetype alone determines the stats, and the name tells you nothing — 480mm Fluted and 510mm Fluted are different archetypes on the same weapon.</p>
+</div>
 
 <h3>Primitives</h3>
 <p>Archetypes are not arbitrary. They are named combinations of five primitives, and their costs are the sum:</p>
@@ -863,16 +914,14 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td class="nm">Short</td><td class="pts">15</td><td><span class="t buff">+HIP1</span> <span class="t buff">+ADS</span> <span class="t debuff">−VEL</span></td><td class="note">Basic + Short</td></tr>
 <tr><td class="nm">Light</td><td class="pts">20</td><td><span class="t buff">+mACC</span> <span class="t buff">+ADS</span></td><td class="note">20</td></tr>
 <tr><td class="nm">Cryo</td><td class="pts">20</td><td><span class="t buff">+ADS</span> <span class="t buff">+SUSTAIN</span></td><td class="note">Basic + Heavy</td></tr>
-<tr><td class="nm">Ext. Light <span class="note">EF88</span></td><td class="pts">25</td><td><span class="t buff">+mACC</span> <span class="t buff">+ADS</span> <span class="t buff">+VEL</span></td><td class="note">Light + Extended</td></tr>
-<tr><td class="nm">Short Light <span class="note">EF88</span></td><td class="pts">25</td><td><span class="t buff">+mACC</span> <span class="t buff">+ADS</span> <span class="t buff">+HIP1</span> <span class="t debuff">−VEL</span></td><td class="note">Light + Short</td></tr>
-<tr><td class="nm">Suppressed <span class="note">VSSM</span></td><td class="pts">20</td><td><span class="t conceal">HIDE-MAP</span></td><td class="note">integral</td></tr>
-<tr><td class="nm">Suppressed Enh. <span class="note">VSSM</span></td><td class="pts">30</td><td><span class="t conceal">HIDE-MAP+</span> <span class="note">~9m instead of ~21m</span></td><td class="note">integral + 10</td></tr>
+<tr><td class="nm">Ext. Light<sup>†</sup></td><td class="pts">25</td><td><span class="t buff">+mACC</span> <span class="t buff">+ADS</span> <span class="t buff">+VEL</span></td><td class="note">Light + Extended</td></tr>
+<tr><td class="nm">Short Light<sup>†</sup></td><td class="pts">25</td><td><span class="t buff">+mACC</span> <span class="t buff">+ADS</span> <span class="t buff">+HIP1</span> <span class="t debuff">−VEL</span></td><td class="note">Light + Short</td></tr>
+<tr><td class="nm">Suppressed<sup>‡</sup></td><td class="pts">20</td><td><span class="t conceal">HIDE-MAP</span></td><td class="note">integral</td></tr>
+<tr><td class="nm">Suppressed Enh.<sup>‡</sup></td><td class="pts">30</td><td><span class="t conceal">HIDE-MAP+</span></td><td class="note">integral + 10</td></tr>
 </table>
 
-<div class="good">
-<b>Every archetype solves under the pricing formula.</b>
-<p style="margin-bottom:0">Eleven for eleven. The barrel slot also supplied three component prices no other slot exposed: <span class="t buff">+VEL</span> at 5, <span class="t buff">+SUSTAIN</span> at 10, and the −5 discount for accepting <span class="t debuff">−VEL</span> or <span class="t debuff">−DRAW</span>.</p>
-</div>
+<p class="note"><sup>†</sup> EF88 only. &nbsp; <sup>‡</sup> Integrally suppressed weapons, which have no muzzle slot. <span class="t conceal">HIDE-MAP+</span> cuts minimap spotting to ~9m rather than ~21m.</p>
+<p class="note">The barrel slot is where three component prices appear that no other slot exposes: <span class="t buff">+VEL</span> at 5, <span class="t buff">+SUSTAIN</span> at 10, and the −5 discount for accepting <span class="t debuff">−VEL</span> or <span class="t debuff">−DRAW</span>.</p>
 
 <h3>Integrally suppressed weapons buy concealment in the barrel slot</h3>
 <p>Weapons with an integral suppressor have no muzzle slot. Their barrel archetypes are the suppressor instead.</p>
@@ -901,13 +950,15 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <li>costs <b>+5 points</b>, unless the standard version is already at the 5-point floor</li>
 </ul>
 
-<h3>Reading a magazine list</h3>
+<div class="userbox">
+<h4>Reading a magazine list</h4>
 <ol>
 <li>Tag straight from each description — if it does not mention a stat, there is no tag</li>
 <li>The low-capacity options sit at the 5-point floor and buy handling rungs</li>
 <li>The high-capacity options cost <span class="t debuff">−mSPD</span> and scale in price</li>
 <li>Each FAST is its standard counterpart, one <span class="t debuff">−DRAW</span> rung slower, plus <span class="t buff">+RELOAD</span></li>
 </ol>
+</div>
 
 <h2>Class-restricted attachments</h2>
 <table>
@@ -915,10 +966,12 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td>Anti-Glare Coating</td><td><span class="t lock">SNIPER</span> — only class with scope glint</td></tr>
 <tr><td>Adjustable Magnification 2 / 3 / 4x</td><td><span class="t lock">SNIPER</span></td></tr>
 <tr><td>DLC Bolt</td><td><span class="t lock">SNIPER</span> — every sniper except the Mini Scout</td></tr>
+<tr><td>A3 Receiver</td><td><span class="t lock">M16A4</span> — the only weapon that offers it</td></tr>
+<tr><td>Burst Training · Match Trigger</td><td>Scattered across a handful of weapons</td></tr>
 <tr><td>Compact Handstop</td><td><span class="t lock">SMG</span></td></tr>
 <tr><td>Buckshot · Flechette · Slugs</td><td><span class="t lock">SHOTGUN</span></td></tr>
 </table>
-<p class="note">Magwell Flare and DLC Bolt are not restrictions so much as the two halves of one feature — <span class="t cap">ADS-RELOAD</span> for non-snipers and snipers respectively. Match Trigger simply requires a semi-auto mode to act on.</p>
+<p class="note">Magwell Flare and DLC Bolt are not restrictions so much as the two halves of one feature — <span class="t cap">ADS-RELOAD</span> for non-snipers and snipers respectively.</p>
 
 <h2>Untracked mechanics</h2>
 <p>Everything below changes how a weapon performs and appears in <b>no stat bar, on any site, in any datamine</b>. Most of them are only visible in the in-game tooltip text, and several are visible nowhere at all.</p>
@@ -927,7 +980,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td>Recoil buildup and recovery</td><td><span class="t buff">+RBLD</span></td><td>It is a curve, not a number — no bar can show it</td></tr>
 <tr><td>ADS accuracy while moving</td><td><span class="t debuff">−mACC</span></td><td>Primary drawback of 12 of 21 grips, and absent from every stat bar</td></tr>
 <tr><td>ADS movement speed</td><td><span class="t debuff">−mSPD</span></td><td>Published as "mobility" — a stat that doesn't separately exist</td></tr>
-<tr><td>Laser visibility to enemies</td><td><span class="t debuff">−SEEN</span></td><td>The real price of every hipfire bonus above rung 1</td></tr>
+<tr><td>Laser beam in world space</td><td><span class="t debuff">−SEEN</span></td><td>The real price of every hipfire bonus above rung 1, and it reveals position rather than presence</td></tr>
 <tr><td>In-world spotting</td><td><span class="t conceal">HIDE-3D</span></td><td>Concealment isn't modeled as a stat anywhere</td></tr>
 <tr><td>Minimap spot range</td><td><span class="t conceal">HIDE-MAP</span></td><td>Concealment isn't modeled as a stat anywhere</td></tr>
 <tr><td>Muzzle flash</td><td><span class="t conceal">HIDE-FLASH</span></td><td>Concealment isn't modeled as a stat anywhere</td></tr>
@@ -940,7 +993,6 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td>Health regen delay</td><td><span class="t cap">REGEN-DELAY</span></td><td>Affects the target, not the weapon</td></tr>
 <tr><td>Penetration / collateral</td><td><span class="t buff">+PEN</span></td><td>Only matters through cover, so it never appears on a damage chart</td></tr>
 </table>
-<p class="note"><b>This is the actual reason published databases are misleading rather than merely incomplete.</b> The stat bars they copy are real, but the things that decide a build mostly aren't in them.</p>
 
 <h2>Cross-slot interactions</h2>
 <p>The pricing formula prices each attachment in isolation. Builds are decided by what happens when they stack.</p>
@@ -951,7 +1003,6 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><th>Grants <span class="t buff">+ADS</span></th><th>Baseline</th></tr>
 <tr><td>Basic · Short · Light · Cryo · Ext. Light · Short Light</td><td>Extended · Heavy · Heavy Ext. · Suppressed</td></tr>
 </table>
-<p class="note">The ladder's steps shrink toward the fast end, so the second rung is worth less than the first: 300 → 250 saves 50ms, 200 → 167 saves 33.</p>
 
 <h3>Stacking moving accuracy</h3>
 <p>Two slots grant <span class="t buff">+mACC</span>, one tier each:</p>
@@ -960,7 +1011,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <tr><td>Barrel</td><td>Light · Ext. Light · Short Light</td><td class="pts">1</td></tr>
 <tr><td>Accessory</td><td>50 MW Violet · 50 MW Blue · 120 MW Blue</td><td class="pts">1 each</td></tr>
 </table>
-<p><b>Barrel plus one laser reaches −2, and that is the ceiling</b> — a second laser cannot be mounted and no other slot grants <span class="t buff">+mACC</span>. The −3 rung the simulator models has no known attachment route. Violet is the only unseen source, so a concealed build gives up nothing to reach −2.</p>
+<p><b>Barrel plus one laser reaches −2, and that is the ceiling</b> — a second laser cannot be mounted and no other slot grants <span class="t buff">+mACC</span>. The −3 rung the simulator models has no known attachment route. Violet is the only source without a projected beam, so a stealth build gives up nothing positional to reach −2.</p>
 <p class="note"><span class="t debuff">−mACC</span> is underbarrel-only, so it can never exceed one tier — but that one tier is the difference between needing three <span class="t buff">+mACC</span> sources and needing four.</p>
 
 <h3>Three slots penalize the same stat</h3>
@@ -974,7 +1025,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 <p>A high-control, high-capacity, thermal build stacks the penalty three deep against a single 10-point counter in a fourth slot. <b>Neither <span class="t debuff">−mACC</span> nor <span class="t debuff">−mSPD</span> can be countered from within the slot that inflicts it</b> — see Rule 2.</p>
 
 <h3>Recoil is additive across two slots</h3>
-<p>Muzzle and underbarrel both grant recoil reduction and they stack. Maximum available is <b>Compensated Brake (20) + a <span class="t buff">+REC5</span> grip (35) = 55 points</b> for the highest recoil control in the game plus <span class="t buff">+RBLD</span>, leaving 45 for everything else.</p>
+<p>Muzzle and underbarrel both grant recoil reduction and they stack. Maximum available is <b>Compensated Brake (20) + a <span class="t buff">+REC5</span> grip (35) = 55 points</b> for the highest recoil control in the game plus <span class="t buff">+RBLD</span>, leaving 45, of which 20 is already committed to the floors.</p>
 
 <h2>Error log</h2>
 <div class="warn">
@@ -1015,14 +1066,15 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 </table>
 
 <h2>Open questions</h2>
-<p>The model is complete. What remains is coverage rather than mechanics.</p>
+
 <ol>
-<li><b>The third <span class="t buff">+mACC</span> source.</b> The tier system bottoms out at −3, where moving spread equals stationary, but only two sources exist across all nine slots. Whatever reaches the last rung is outside the attachment system — stance, class trait, or something not yet found</li>
 <li><b>Per-weapon magazine tables</b> beyond the assault rifles — LMG belt boxes, shotgun shell tubes and sniper speedloaders sit in very different capacity bands</li>
 <li><b>Optic-to-accessory availability</b> — which specific optics a given weapon offers the Magnifier or Piggyback on</li>
 <li><b>Long Range ammo's drag magnitude</b> — the effect is confirmed, the size of it needs ballistic testing at range</li>
-<li><b>Laser beam visibility range</b> — Red and Violet are unseen, everything above them is visible. The distance at which a visible beam reads has not been measured</li>
+<li><b>The third <span class="t buff">+mACC</span> source.</b> The tier system bottoms out at −3, where moving spread equals stationary, but only two sources exist across all nine slots. Whatever reaches the last rung is outside the attachment system</li>
 </ol>
+
+
 
 <h2>For the assistant</h2>
 <div class="llmnote">
@@ -1042,7 +1094,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 
 <li><b>If you come up short, upgrade — do not add.</b> Improve something already carrying weight rather than filling the gap with a cheap attachment. See "Spending a remainder" above.</li>
 
-<li><b>Never present a residual pick as a reason the build works.</b> Ergonomics is optional, always available and cheap, so it is where a leftover 5 naturally lands — and every model reaches for it. Taking one is defensible; writing a paragraph justifying it is not. If it earned a line of explanation, it should have earned the points on merit instead.</li>
+<li><b>Never present a residual pick as a reason the build works.</b> Taking a cheap ergonomics option to round out a total is defensible; writing a paragraph justifying it is not.</li>
 
 <li><b>Price each pick against Rule 1</b> and show the running total, so any mismatch surfaces on its own.</li>
 
@@ -1062,7 +1114,7 @@ Bipod (10) · Underslung Mount (10) · Compact Handstop (10) · Slim Handstop (1
 </ul>
 
 <footer>
-<p><b>BF6 Attachment Database v0.9</b> — compiled and written by AntiPhysicsGames, 29 July 2026.</p>
+<p><b>BF6 Attachment Database v0.9.1</b> — compiled and written by AntiPhysicsGames, 29 July 2026.</p>
 <p>The tag system, archetype model, tiered ladders, pricing formula and all written analysis in this document are original work. Underlying game values are facts and belong to no one; the way they are organized and explained here does not.</p>
 <p>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><b>CC BY-NC-SA 4.0</b></a> — you may share and adapt this freely with credit, for non-commercial use, provided derivatives carry the same license.</p>
 <div class="support">
