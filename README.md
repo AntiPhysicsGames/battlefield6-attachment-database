@@ -34,9 +34,29 @@ Point at the section explicitly — it sits at the end of a long page and models
 
 ## Status
 
-**v0.9.1** — pre-release. All nine attachment slots modeled. See Open Questions for what is still missing.
+**v0.9.2** — pre-release. All nine attachment slots modeled. See Open Questions for what is still missing.
 
 ## Changelog
+
+### v0.9.2
+
+**Additions**
+
+- Weapon cards. Every automatic weapon, stock, with its shots-to-kill band by range, hipfire and aimed reach, dispersion ceilings, and a named counter for its worst stat.
+- Stat families split by range. `+mACC` scales up with range, `+mSPD` scales down, `+HIP` and `+ADS` stop mattering past the hipfire band.
+- Named counters table, keyed to thresholds you can read straight off a card.
+
+**Removals**
+
+- Untracked Mechanics
+- Class-restricted attachments
+- Cross-slot interactions
+
+**Editorial**
+
+- Trimmed down several sections for an attempt at brevity.
+- Slot sections reordered to match the allocation steps.
+- 79 em-dashes removed in favor of proper grammar.
 
 ### v0.9.1
 
