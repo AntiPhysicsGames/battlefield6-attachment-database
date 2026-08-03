@@ -13,12 +13,13 @@ Every public BF6 attachment database copies the same stat bars, and those stat b
 - **A tag vocabulary** for every effect and drawback, including the ones no source tracks — recoil buildup, ADS accuracy while moving, laser visibility, spotting ranges
 - **Six tiered stat ladders** — ADS, draw, recoil, hipfire and more move in discrete rungs, not continuous values
 - **A pricing formula** that predicts any attachment's cost from its effects, verified against every muzzle, grip, barrel archetype and ammo type
-- **Archetype models** collapsing 163 barrel names into 11 archetypes and the ammo slot into 15
+- **Archetype models** collapsing 163 barrel names into 11 archetypes, the ammo slot into 15, and 42 optics into 6 classes
+- **Weapon cards** for all 38 automatic weapons: shots-to-kill by range, hipfire and aimed reach, recoil ceilings, and a named counter for each weapon's worst stat
 - **An error log** of what the public sources get wrong, including three attachments that do not exist in the game
 
 ## Using it with an LLM
 
-The document is a model, not a dataset — it explains how attachments behave and how they are priced, and leaves the two genuinely weapon-specific figures to be read in game. That split is what makes it useful to hand to a model.
+The document explains how attachments behave and how they are priced, and the weapon cards carry the per-weapon figures a model would otherwise invent. Only two costs genuinely vary per weapon and have to be read in game: magazines, and headshot and subsonic ammo.
 
 Paste this with your weapon name:
 
@@ -34,9 +35,41 @@ Point at the section explicitly — it sits at the end of a long page and models
 
 ## Status
 
-**v0.9.2** — pre-release. All nine attachment slots modeled. See Open Questions for what is still missing.
+**v0.9.3** — pre-release.
 
 ## Changelog
+
+### v0.9.3
+
+**Corrections**
+
+- Recoil ladder is linear: `+REC4` and `+REC5` cost corrected.
+- `+mSPD` cost corrected.
+- Lights grant `+HIP-RBLD`, hipfire spread recovery, not hipfire accuracy.
+- Laser/Light Combo Red and Green added. Removed from the error log.
+- Draw speed updated.
+- `−SEEN` renamed `VISIBLE`. It names a property, not a drawback.
+
+**Additions**
+
+- `+HIP-RBLD` tag.
+- Numbered sections and a table of contents.
+- Jump links throughout. Tags, attachments, archetypes, slots and rules.
+- Hipfire drawn as a band on each card, showing the cone widening as you fire.
+
+**Removals**
+
+- The range-coverage system
+- The optic tags: `ZTOGGLE`, `ZCYCLE`, `THERM`, `MAGNIFIER`, `PIGGYBACK`
+- How to build a loadout
+
+  - This document exists to give you everything you need to make an informed buildcrafting decision. Walking you through that decision was judged outside its scope. The assistant section picked up extra guidance, and the items worth keeping folded into Design rules.
+
+**Editorial**
+
+- Optics collapsed to six classes.
+- Shortened Tag Legend.
+- Weapon cards reworked: Squirreliness, Climb and Spread, each ranked against the roster.
 
 ### v0.9.2
 
