@@ -1,6 +1,6 @@
 # BF6 Attachment Database
 
-A reverse-engineered reference for Battlefield 6 attachments — what they actually do, what they cost, and the pricing formula that governs all of it.
+A reference for Battlefield 6 attachments: what they do, what they cost, and how they change a weapon's stats. Every value is read straight off the in-game screens.
 
 **Read it here:** https://antiphysicsgames.github.io/battlefield6-attachment-database/
 
@@ -8,36 +8,59 @@ A reverse-engineered reference for Battlefield 6 attachments — what they actua
 
 ## What this is
 
-Every public BF6 attachment database copies the same stat bars, and those stat bars are missing the mechanics that actually decide a build. This document is built from in-game tooltips, cross-referenced against datamined tables, and covers:
+Most BF6 attachment databases copy the same stat bars, and those bars leave out the mechanics that actually decide a build. This one is built one gun at a time from the in-game build menu, and covers:
 
-- **A tag vocabulary** for every effect and drawback, including the ones no source tracks — recoil buildup, ADS accuracy while moving, laser visibility, spotting ranges
-- **Six tiered stat ladders** — ADS, draw, recoil, hipfire and more move in discrete rungs, not continuous values
-- **A pricing formula** that predicts any attachment's cost from its effects, verified against every muzzle, grip, barrel archetype and ammo type
-- **Archetype models** collapsing 163 barrel names into 11 archetypes, the ammo slot into 15, and 42 optics into 6 classes
-- **Weapon cards** for all 38 automatic weapons: shots-to-kill by range, hipfire and aimed reach, recoil ceilings, and a named counter for each weapon's worst stat
-- **An error log** of what the public sources get wrong, including three attachments that do not exist in the game
+- **Every attachment** with its cost, type, tags and stat changes. Attachments that do the same thing under different names share an entry.
+- **A tag vocabulary** for every effect and drawback, including the ones the stat bars don't show: recoil buildup, moving ADS accuracy, laser visibility, spotting ranges.
+- **Point costs for every tag.** Each attachment's cost is checked against the sum of its tags.
+- **A build menu.** Pick an attachment per slot and watch the stats change as you hover. Builds can be shared by link and pinned for comparison.
+- **The four in-game bars**, with the formula behind each one.
+- **Open questions**, listed on the site rather than guessed at.
 
-## Using it with an LLM
-
-The document explains how attachments behave and how they are priced, and the weapon cards carry the per-weapon figures a model would otherwise invent. Only two costs genuinely vary per weapon and have to be read in game: magazines, and headshot and subsonic ammo.
-
-Paste this with your weapon name:
-
-```
-Reference: https://antiphysicsgames.github.io/battlefield6-attachment-database/
-
-Read the "For the assistant" section at the end of that page before you start.
-
-Building a loadout for the [WEAPON].
-```
-
-Point at the section explicitly — it sits at the end of a long page and models frequently stop before reaching it. Everything else in the document they find on their own.
+If a value hasn't been read in game, it's left blank.
 
 ## Status
 
-**v0.9.3** — pre-release.
+**v0.9.4**: pre-release. The M433 is fully recorded; more weapons are being added one at a time.
 
 ## Changelog
+
+### v0.9.4
+
+**Rebuild**
+
+- Rebuilt from a single long document into a searchable encyclopedia with a sidebar, attachment pages, weapon pages and a reference section.
+- All weapon and attachment data re-read from the game. v0.9.3 values that haven't been re-checked are labelled as such.
+
+**Additions**
+
+- Build menu: live stat preview, green and red changes, share links, pin to compare, sorting and filtering inside each slot, keyboard controls.
+- Optics recorded by name, with the optic accessories each one enables.
+- Right Accessory split from Top Accessory.
+- Tags: `LINEAR`, `BLIND`, `AUTO`, `THERMAL`, `VARIABLE`, `MAG`.
+- Point cost on every tag, with a cost check on every attachment.
+- Mobility worked out in steps: each ADS step is 4, each draw step 2, each ADS move speed tier 2, each moving ADS accuracy tier 4. It matches 57 of 59 weapons exactly.
+- What each tag does on the stats panel, with ranges that narrow as more weapons are added.
+- Search by tag combination, e.g. `+ADS -mACC`.
+- Season accent colours, light and dark themes, phone and 4K modes.
+
+**Corrections**
+
+- `hREC` replaced by `LINEAR`: the Linear Compensator trades horizontal recoil for vertical.
+- Hipfire steps move along the hipfire table (+7, +7, +8 on the M433), not a flat amount.
+- Barrel velocity changes are percentage-based on the M433 (×1.25 Extended, ×0.80 Short).
+
+**Removals**
+
+- Weapon cards, shots-to-kill bands and named counters.
+- Barrel, ammo and optic archetypes, replaced by real attachment names.
+- The pricing formula, replaced by per-tag costs.
+- The error log.
+- The "For the assistant" section.
+
+**Editorial**
+
+- Descriptions rewritten in one short style. Lines that only say what an attachment doesn't do were dropped.
 
 ### v0.9.3
 
@@ -63,8 +86,6 @@ Point at the section explicitly — it sits at the end of a long page and models
 - The optic tags: `ZTOGGLE`, `ZCYCLE`, `THERM`, `MAGNIFIER`, `PIGGYBACK`
 - How to build a loadout
 
-  - This document exists to give you everything you need to make an informed buildcrafting decision. Walking you through that decision was judged outside its scope. The assistant section picked up extra guidance, and the items worth keeping folded into Design rules.
-
 **Editorial**
 
 - Optics collapsed to six classes.
@@ -76,8 +97,8 @@ Point at the section explicitly — it sits at the end of a long page and models
 **Additions**
 
 - Weapon cards. Every automatic weapon, stock, with its shots-to-kill band by range, hipfire and aimed reach, dispersion ceilings, and a named counter for its worst stat.
-- Stat families split by range. `+mACC` scales up with range, `+mSPD` scales down, `+HIP` and `+ADS` stop mattering past the hipfire band.
-- Named counters table, keyed to thresholds you can read straight off a card.
+- Stat families split by range.
+- Named counters table.
 
 **Removals**
 
@@ -87,35 +108,28 @@ Point at the section explicitly — it sits at the end of a long page and models
 
 **Editorial**
 
-- Trimmed down several sections for an attempt at brevity.
+- Trimmed down several sections.
 - Slot sections reordered to match the allocation steps.
-- 79 em-dashes removed in favor of proper grammar.
 
 ### v0.9.1
 
 **Corrections**
 
 - Ribbed Stubby no longer incorrectly lists `+mSPD`.
-- `−SEEN` redefined: the laser projects a beam roughly 5m into world space, revealing position rather than presence. Red and Violet are positionally quiet, not invisible — the 20–30 point tier is not disqualified for stealth builds.
-- Rule 2 no longer claims high-rung grips are unaffordable for mobile players. Both drawbacks have counters.
-- Rule 4 narrowed: mounting is the only thing that improves on standing still, not the only purchasable spread reduction.
-- Fire-mode attachments marked weapon-specific rather than competing choices.
+- `−SEEN` redefined as a beam revealing position.
+- Rules 2 and 4 narrowed.
+- Fire-mode attachments marked weapon-specific.
 
 **Additions**
 
-- Burst Training (15, ergonomics) and the `BURST` tag.
-- `VARZOOM` split into `ZTOGGLE` and `ZCYCLE`. The two-magnification optics
-  and the multi-magnification ones are priced differently and now read that
-  way in the table.
-- `+mSPD` and `+PEN` added to the component costs in Rule 1.
-- sym.gg and the ADS Spread Simulator linked where they are useful, not just
-  in Sources.
+- Burst Training and the `BURST` tag.
+- `VARZOOM` split into `ZTOGGLE` and `ZCYCLE`.
+- sym.gg and the ADS Spread Simulator linked where useful.
 
 **Editorial**
 
-- Removed overstating language throughout.
-- Colour-coded callouts by audience: blue is addressed to an assistant, amber
-  to you, red is a warning, green is a finding.
+- Removed overstating language.
+- Colour-coded callouts by audience.
 
 ### v0.9
 
@@ -123,12 +137,12 @@ Initial release.
 
 ## Corrections
 
-Open an issue. Tooltip transcriptions and per-weapon costs are especially welcome — the magazine slot and the headshot/subsonic ammo are the two places costs genuinely vary per weapon.
+Open an issue. In-game readings are especially welcome: a weapon's stats panel, or what an attachment changes on it.
 
 ## License
 
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — share and adapt with credit, non-commercial, derivatives under the same license.
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): share and adapt with credit, non-commercial, derivatives under the same license.
 
-Compiled and written by **AntiPhysicsGames**, 2026.
+Compiled and written by **AntiPhysicsGames**, 2026. Support the project on [Ko-fi](https://ko-fi.com/R8Q4245SX2).
 
 Battlefield 6 is a trademark of Electronic Arts Inc. Unofficial fan reference, not affiliated with EA or DICE.
